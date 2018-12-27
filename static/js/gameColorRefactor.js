@@ -125,3 +125,5 @@ for (j = 0; j < squares.length; j++){
 		squares[j].style.backgroundColor = color;
 	}
 };
+
+

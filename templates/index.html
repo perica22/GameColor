@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}INDEX{% endblock %}</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  	<link href="{{ url_for('static', filename='static/css/gameColor.css') }}" rel="stylesheet", type="text/css"/>
+
+
+  	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+
+	<h1 id="h1">The Great <br>{% if showRGB %}<span id="colorDisplay"></span> <br>{% endif %}Color Game</h1>
+
+	<div id="stripe">
+	{% block stripe %}
+	
+		{% if showLoginReg %}
+			<a href="{{ url_for('login') }}"><button id="reset">LOGIN</button></a>
+			<button id="reset">REGISTER</button>
+		{% endif %}
+
+    {% endblock %}
+    </div>	
+
+    {% block main %}{% endblock %}
+
+<script type="text/javascript" src="{{ url_for('static', filename='static/js/lib/jquery-3.3.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='static/js/gameColorRefactor.js') }}"></script>
+
+</body>
+</html>
+
+        

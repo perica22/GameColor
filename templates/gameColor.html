@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Color Game</title>
-	
-  <link href="{{ url_for('static', filename='css/gameColor.css') }}" rel="stylesheet"/>
-</head>
-<body>
-	<h1 id="h1">The Great <br><span id="colorDisplay">RGB</span> <br>Color Game</h1>
+{% extends "index.html" %}
 
-	<div id="stripe">
-		<button id="reset">NEW COLORS</button>
-		<span id="message"></span>
-		<button id="easydBtn">EASY</button>
-		<button id="hardBtn" class="selected">HARD</button>
-	</div>
+{% block title %}
+    Color Game
+{% endblock %}
+
+{% block h1 %}
+	RGB
+{% endblock %}
+
+
+{% block stripe %}
+	<button id="reset">NEW COLORS</button>
+	<span id="message"></span>
+	<button id="easydBtn">EASY</button>
+	<button id="hardBtn" class="selected">HARD</button>
+{% endblock %}
+
+{% block main %}
 
 	<div id="container">
 		<div class="square"></div>
@@ -22,14 +25,7 @@
 		<div class="square"></div>
 		<div class="square"></div>
 		<div class="square"></div>
-		
-
 	</div>
 
-<script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery-3.3.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/gameColorRefactor.js') }}"></script>
+{% endblock %}
 
-</body>
-</html>
-
-        
