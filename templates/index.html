@@ -22,7 +22,7 @@
 	
 		{% if showLoginReg %}
 			<a href="{{ url_for('login') }}"><button id="reset">LOGIN</button></a>
-			<button id="reset">REGISTER</button>
+			<a href="{{ url_for('register') }}"><button id="reset">REGISTER</button></a>		
 		{% endif %}
 
     {% endblock %}

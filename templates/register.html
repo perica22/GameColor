@@ -1,0 +1,61 @@
+{% extends "index.html" %}
+
+{% block title %}
+    REGISTER
+{% endblock %}
+
+{% block stripe %}{% endblock %}
+
+{% block main %} 
+
+<div class="container-fluid">
+	<form action="" method="post" class="register-form"> 
+		<div class="row">      
+			<div class="col-md-4 col-sm-4 col-lg-4">
+				{{ form.username.label }}
+				{{ form.username(size=2, placeholder='Username') }}
+				{% for message in form.username.errors %}				
+					<p class="error_message">{{message}}</p>
+				{% endfor %} 
+			</div>            
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-sm-4 col-lg-4">
+				{{ form.email.label }}
+				{{ form.email(size=2, placeholder='Emal') }}
+				{% for message in form.email.errors %}
+					<p class="error_message">{{ message }}</p>
+				{% endfor %}
+			</div>            
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-sm-4 col-lg-4">
+					{{ form.password.label }}
+					{{ form.password(size=32, placeholder='Password') }}
+					{% for message in form.password.errors %}
+						<p class="error_message">{{ message }}</p>
+					{% endfor %}
+				</div>            
+			</div>
+      		<div class="row">
+           		<div class="col-md-4 col-sm-4 col-lg-4">
+	              	{{ form.confirm.label }}
+					{{ form.confirm(placeholder='Confirm Password') }}
+					{% for message in form.confirm.errors %}
+						<p class="error_message">{{ message }}</p>
+					{% endfor %}             
+           		</div>            
+      		</div>
+
+      		<div class="row">
+         		<div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+            		<button type="submit" formaction="{{ url_for('register') }}" class="btn btn-default regbutton">Register</button>
+          		</div>
+	         	<div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+	           		<button type="submit" formmethod="get" formaction="{{ url_for('login') }}" class="btn btn-default logbutton">Sign in</button>
+	         	</div>   
+      		</div>    
+    </form>
+</div>
+{% endblock %}
+
