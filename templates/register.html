@@ -13,7 +13,7 @@
 		<div class="row">      
 			<div class="col-md-4 col-sm-4 col-lg-4">
 				{{ form.username.label }}
-				{{ form.username(size=2, placeholder='Username') }}
+				{{ form.username(size=32, placeholder='Username') }}
 				{% for message in form.username.errors %}				
 					<p class="error_message">{{message}}</p>
 				{% endfor %} 
@@ -22,7 +22,7 @@
 		<div class="row">
 			<div class="col-md-4 col-sm-4 col-lg-4">
 				{{ form.email.label }}
-				{{ form.email(size=2, placeholder='Emal') }}
+				{{ form.email(size=32, placeholder='Email') }}
 				{% for message in form.email.errors %}
 					<p class="error_message">{{ message }}</p>
 				{% endfor %}
@@ -40,7 +40,7 @@
       		<div class="row">
            		<div class="col-md-4 col-sm-4 col-lg-4">
 	              	{{ form.confirm.label }}
-					{{ form.confirm(placeholder='Confirm Password') }}
+					{{ form.confirm(size=32, placeholder='Confirm Password') }}
 					{% for message in form.confirm.errors %}
 						<p class="error_message">{{ message }}</p>
 					{% endfor %}             

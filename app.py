@@ -1,14 +1,13 @@
 from flask import Flask, flash, redirect, render_template, request, session, url_for
-from validate import RegistrationForm
-
+from validate import RegistrationForm, LoginForm, User
+from config import Config
 
 
 app = Flask(__name__, static_url_path="", static_folder="")
-app.config["SECRET_KEY"] = "perica"
+app.config.from_object(Config)
 
 
-user = {}
-
+db = User()
 
 
 @app.route("/", methods=['GET'])
@@ -26,13 +25,21 @@ def game():
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
-    if request.method == "POST":
-        pass
+    form = LoginForm(request.form)
 
+    if request.method == "POST":
+    
+        if form.validate() == False:
+            #flash("bad data")
+            return render_template("login.html", form=form)
+        
+        else:            
+            return redirect(url_for("game"))
 
     else:
-	   return render_template("login.html")
+        return render_template("login.html", form=form)
 
+    
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -42,7 +49,7 @@ def register():
     if request.method == "POST":
 
         if form.validate() == False:
-            flash("bad data")
+            #flash("bad data")
             
             return render_template("register.html", form=form)
 

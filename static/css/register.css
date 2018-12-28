@@ -42,7 +42,7 @@ body, html{
 
 .register-form input{
     margin-bottom: 5px;
-    width: 430px;
+    width: 570px;
     height: 40px;
     border-radius: 0px;
 }
@@ -55,3 +55,5 @@ body, html{
 .col-md-4.col-sm-4.col-lg-4{
     max-width: 100%;
 }
+
+

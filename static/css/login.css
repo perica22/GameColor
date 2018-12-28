@@ -26,3 +26,11 @@
 .d-block.img-fluid {
 	height: 100%;
 }
+
+.input_login{
+	width: 320px;
+}
+
+.error_message{
+	color: hotpink;
+}
