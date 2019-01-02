@@ -5,10 +5,6 @@ from wtforms.validators import DataRequired
 
 
 
-class User():
-    user = {'name': 'asdasd', 'email': 'perica@rechargeapps.com', 'password': 'perica22'}
-
-
 class RegistrationForm(Form):
     username = StringField('USERNAME', [validators.Length(min=4, max=25), 
     	validators.DataRequired()

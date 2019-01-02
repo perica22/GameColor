@@ -5,7 +5,7 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-  	<link href="{{ url_for('static', filename='static/css/gameColor.css') }}" rel="stylesheet", type="text/css"/>
+  	<link href="{{ url_for('static', filename='/css/gameColor.css') }}" rel="stylesheet", type="text/css"/>
 
 
   	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -30,8 +30,8 @@
 
     {% block main %}{% endblock %}
 
-<script type="text/javascript" src="{{ url_for('static', filename='static/js/lib/jquery-3.3.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='static/js/gameColorRefactor.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='/js/lib/jquery-3.3.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='/js/gameColorRefactor.js') }}"></script>
 
 </body>
 </html>
