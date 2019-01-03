@@ -10,6 +10,7 @@
 
 <div class="container-fluid">
 	<form action="" method="post" class="register-form"> 
+        {{ form.hidden_tag() }}
 		<div class="row">      
 			<div class="col-md-4 col-sm-4 col-lg-4">
 				{{ form.username.label }}

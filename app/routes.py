@@ -1,5 +1,5 @@
 from flask import flash, redirect, render_template, request, url_for, session
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user, login_required
 
 from app import app
 from app.validate import LoginForm, RegistrationForm
@@ -15,6 +15,7 @@ def index():
 
 
 @app.route("/game", methods=['GET'])
+@login_required
 def game():
 
 	return render_template("gameColor.html", showRGB = True)
@@ -25,62 +26,73 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('game'))
 
-    form = LoginForm(request.form)
+    form = LoginForm()
 
     if request.method == "POST":
-    
+
         if form.validate() == False:
             #flash("bad data")
             return render_template("login.html", form=form)
-        else:            
+        else:
             user = User.query.filter_by(username=form.username.data).first()
-           
-            print(user.check_password(form.password.data))
 
-            if user.username == None or user.check_password(form.password.data) == False:
-                flash('Invalid username or password')
-                return redirect(url_for('login'))
-                
+        if not user or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
 
-            else:
-                return redirect(url_for("game"))
+        else:
+            login_user(user)
+            next_page = request.args.get('next')
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('game')
+            print(next_page)
+            return redirect(next_page)
+        #return redirect(url_for("game"))
 
     else:
         return render_template("login.html", form=form)
 
-    
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
-    form = RegistrationForm(request.form)
+    if current_user.is_authenticated:
+        return redirect(url_for('game'))
 
+    form = RegistrationForm()
+
+    
     if request.method == "POST":
 
-        if form.validate() == False:
-            #flash("bad data")
+        if form.validate_on_submit():
             
-            return render_template("register.html", form=form)
+            print("creating")
+            
+            user = User(username=form.username.data, email=form.email.data)
+            user.set_password(form.password.data)
+            db.session.add(user)
+            print(user)
+            db.session.commit()
+            
+            return redirect(url_for("login"))
 
         else:
+            return render_template("register.html", form=form)
 
-            #user = {"name":"", "email": ""...}
-            username = request.form.get("username")
-            email = request.form.get("email")
-            password = request.form.get("password")
-
-            user["name"] = username
-            user["email"] = email
-            user["password"] = password
-
-            return redirect(url_for("game"))
 
     else:
-        return render_template("register.html", form=form)
+       return render_template("register.html", form=form)
 
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 '''
 TODO
+
+Finins register functions
+
 1. database
 2. login requered wraper
 3. index page - between login and game page

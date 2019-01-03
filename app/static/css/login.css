@@ -34,3 +34,8 @@
 .error_message{
 	color: hotpink;
 }
+
+.flashes{
+	color: red;
+	font-weight: bold;	
+}

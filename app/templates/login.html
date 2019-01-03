@@ -20,7 +20,16 @@
                 <form action="" method="post" class="login-form" novalidate>
                     {{ form.hidden_tag() }}
                     <div class="form-group">
-                        
+                        {% with messages = get_flashed_messages() %}
+                          {% if messages %}
+                            <div class=flashes>
+                            {% for message in messages %}
+                              <p>{{ message }}</p>
+                            {% endfor %}
+                            </div>
+                          {% endif %}
+                        {% endwith %}
+
                         {{ form.username.label }}<br>
                         {{ form.username(size=2, placeholder='Username', class='input_login') }}
                         {% for message in form.username.errors %}               
