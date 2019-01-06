@@ -10,12 +10,13 @@
 
 
 {% block stripe %}
-	<p>{{ current_user.username }}</p>
+	<!--<p>{{ current_user.username }}</p>-->
 	<button id="reset">NEW COLORS</button>
 	<span id="message"></span>
 	<button id="easydBtn">EASY</button>
-	<button id="hardBtn" class="selected">HARD</button>
-	<a href="{{ url_for('logout') }}"><button id="reset">LOGOUT</button></a>	
+	<button id="hardBtn" class="selected">HARD</button>	
+	<a href="{{ url_for('user', username=current_user.username) }}"><button id="reset">HOME</button></a>	
+
 {% endblock %}
 
 {% block main %}

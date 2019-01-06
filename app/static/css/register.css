@@ -56,4 +56,9 @@ body, html{
     max-width: 100%;
 }
 
+#account_message{
+    display: inline-block;
+    margin-left: 40%;
+}
+
 

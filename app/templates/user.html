@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+
+{% block title %}
+    User {{ user.username }}
+{% endblock %}
+
+{% block h1 %}
+	RGB
+{% endblock %}
+
+
+{% block stripe %}
+	<button id="easydBtn">EASY</button>
+	<button id="hardBtn" class="selected">HARD</button>	
+	<a href="{{ url_for('game') }}"><button id="play">PLAY {{ user.username }}</button></a>	
+	<a href="{{ url_for('logout') }}"><button id="logout">LOGOUT</button></a>	
+
+{% endblock %}
+		<h1></h1>
+
+
+{% block main %}
+
+{% endblock %}

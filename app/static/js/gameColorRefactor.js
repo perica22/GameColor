@@ -5,7 +5,6 @@ var colorPicked = null;
 var squares = $(".square");
 var h1 = $("#h1");
 var colorDisplay = $("#colorDisplay");
-var displayMessage = $("#message");
 var newColors = $("#reset");
 var hardBtn = $("#hardBtn");
 var easydBtn = $("#easydBtn");
@@ -20,6 +19,7 @@ easydBtn.on("click", function(){
 	hardBtn.removeClass("selected");
 
 	selectedMode = 3
+	console.log('easy')
 
 	reset(selectedMode, squares);
 });
@@ -30,6 +30,7 @@ hardBtn.on("click", function(){
 	easydBtn.removeClass("selected");
 
 	selectedMode = 6;
+	console.log('hard')
 
 	reset(selectedMode, squares);
 });
@@ -50,8 +51,8 @@ function reset(){
 	initialSet(selectedMode, squares);
 
 	clickOnSquares();
-
-	displayMessage.textContent = "";
+	
+	$('#message').text('');
 	h1[0].style.background = "steelblue";
 }
 
@@ -105,7 +106,7 @@ function clickOnSquares(){
 			
 			//checking if clicked square is correct one
 			if (clickedColor === colorPicked){
-				displayMessage.textContent = "Correct!";
+				$('#message').text('Correct!');
 
 				//changing colors for all squares
 				winColors(colorPicked);
@@ -113,7 +114,7 @@ function clickOnSquares(){
 			}
 			else {
 				this.style.background = "#232323";
-				displayMessage.textContent = "Try again!";
+				$('#message').text('Try again!');
 			}
 		})	
 	}

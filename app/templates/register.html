@@ -4,7 +4,11 @@
     REGISTER
 {% endblock %}
 
-{% block stripe %}{% endblock %}
+{% block stripe %}
+	
+	<p id="account_message">Have an account: </p>
+	<a href="{{ url_for('login') }}"><button class="reset">SIGN IN</button></a>	
+{% endblock %}
 
 {% block main %} 
 
@@ -52,9 +56,6 @@
          		<div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
             		<button type="submit" formaction="{{ url_for('register') }}" class="btn btn-default regbutton">Register</button>
           		</div>
-	         	<div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
-	           		<button type="submit" formmethod="get" formaction="{{ url_for('login') }}" class="btn btn-default logbutton">Sign in</button>
-	         	</div>   
       		</div>    
     </form>
 </div>

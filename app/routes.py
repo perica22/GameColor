@@ -1,5 +1,6 @@
-from flask import flash, redirect, render_template, request, url_for, session
+from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, logout_user, login_required
+from flask_api import FlaskAPI, status, exceptions
 
 from app import app
 from app.validate import LoginForm, RegistrationForm
@@ -44,12 +45,12 @@ def login():
             login_user(user)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
-                next_page = url_for('game')
-            print(next_page)
+                next_page = url_for('user', username=current_user.username)
+
             return redirect(next_page)
         #return redirect(url_for("game"))
 
-    else:
+    elif request.method == "GET":
         return render_template("login.html", form=form)
 
 
@@ -60,25 +61,20 @@ def register():
         return redirect(url_for('game'))
 
     form = RegistrationForm()
-
     
     if request.method == "POST":
 
         if form.validate_on_submit():
             
-            print("creating")
-            
             user = User(username=form.username.data, email=form.email.data)
             user.set_password(form.password.data)
             db.session.add(user)
-            print(user)
             db.session.commit()
             
             return redirect(url_for("login"))
 
         else:
             return render_template("register.html", form=form)
-
 
     else:
        return render_template("register.html", form=form)
@@ -88,14 +84,30 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+
+    if request.method == 'GET':
+            
+        if current_user.username == username:
+            user = User.query.filter_by(username=username).first()
+            return render_template('user.html', user=user)
+
+        else:
+            #errors.not_found_error()
+            return render_template('404.html'), 404
+            #return '', status.HTTP_404_NOT_FOUND
 '''
 TODO
 
-Finins register functions
+Finins register functions --- done
 
-1. database
-2. login requered wraper
-3. index page - between login and game page
+1. database -part
+2. login requered wraper --- done
+3. index page - between login and game page -part
 4. score tracker
 5. options on index page (use some navbars and similar from bootstrapdev) - option to change personal info
 6. statistics page

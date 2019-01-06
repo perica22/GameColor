@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+
+{% block title %}
+    User 
+{% endblock %}
+
+
+{% block stripe %}
+	<p><a href="{{ url_for('user', username=current_user.username) }}">BACK</a></p>
+{% endblock %}
+
+
+{% block main %}
+<div class="error_content">
+    <h2>This page isn't available</h2>
+    <h3>The link you followed may be broken, or the page may have been removed.</h3>
+    <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/UmVRFlQVwwy.png">
+</div>
+{% endblock %}
+
