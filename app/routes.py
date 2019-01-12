@@ -111,4 +111,5 @@ Finins register functions --- done
 4. score tracker
 5. options on index page (use some navbars and similar from bootstrapdev) - option to change personal info
 6. statistics page
+7. error handlic part of the article for email notifications about errors on production stage
 '''

@@ -1,47 +1,28 @@
-var selectedMode = 6;
 var colors = null;
 var colorPicked = null;
 
 var squares = $(".square");
 var h1 = $("#h1");
 var colorDisplay = $("#colorDisplay");
-var newColors = $("#reset");
+var newColors = $("#new_colors");
 var hardBtn = $("#hardBtn");
 var easydBtn = $("#easydBtn");
+var play = $("#play");
+var home = $("a[href*='user/']");
+var logout = $("a[href*='logout']")
+
 
 
 
 reset();
 
-//selecting easy mode
-easydBtn.on("click", function(){
-	$(this).addClass("selected");
-	hardBtn.removeClass("selected");
 
-	selectedMode = 3
-	console.log('easy')
-
-	reset(selectedMode, squares);
-});
-
-//selecting hard mode
-hardBtn.on("click", function(){
-	$(this).addClass("selected");
-	easydBtn.removeClass("selected");
-
-	selectedMode = 6;
-	console.log('hard')
-
-	reset(selectedMode, squares);
-});
-
-//reset button
-newColors.on('click', function() { 
-	reset(selectedMode, squares);
- });
 
 //core functionality
 function reset(){
+	var cookie = document.cookie
+
+	selectedMode = Number(cookie)
 	colors = generateRandomColors(selectedMode);
 	colorPicked = pickColor(selectedMode);
 
@@ -77,11 +58,13 @@ function generateRandomColors(number){
 	return colors;
 };
 
+
 //randomly picking number
 function pickColor(number){
 	var random = Math.floor(Math.random() * number);
 	return colors[random];
 };
+
 
 //setting color for all squares
 function initialSet(selectedMode, squares){
@@ -97,6 +80,7 @@ function initialSet(selectedMode, squares){
 	}
 	clickOnSquares();
 };
+
 
 //adding a click event to all squares
 function clickOnSquares(){
@@ -120,6 +104,7 @@ function clickOnSquares(){
 	}
 };
 
+
 //change colors of all squares after win
 function winColors(color){
 for (j = 0; j < squares.length; j++){
@@ -128,3 +113,57 @@ for (j = 0; j < squares.length; j++){
 };
 
 
+function reset_to_hardmode(){
+	document.cookie = "3; expires=Thu, 08 Jan 2019 00:00:00 UTC;"
+	document.cookie = "6; path=/game";
+};
+
+
+
+
+//reset button
+newColors.on('click', function() { 
+	reset(selectedMode, squares);
+ });
+
+
+//selecting easy mode
+easydBtn.on("click", function(){	
+	$(this).addClass("selected");
+	hardBtn.removeClass("selected");
+
+	document.cookie = "6; expires=Thu, 08 Jan 2019 00:00:00 UTC;"
+	document.cookie = "3; path=/game";
+
+	reset(squares);
+});
+
+//selecting hard mode
+hardBtn.on("click", function(){
+	$(this).addClass("selected");
+	easydBtn.removeClass("selected");
+
+	reset_to_hardmode()
+	
+	reset(squares);
+});
+
+
+//selecting easy mode
+home.on("click", function(){	
+	reset_to_hardmode()
+
+});
+
+
+logout.on("click", function(){	
+	reset_to_hardmode()
+
+});
+
+
+play.on("click", function(){	
+	if (document.cookie == null){
+		document.cookie = "6; path=/game";
+	}
+});
